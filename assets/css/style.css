@@ -1,0 +1,35 @@
+.container-fluid{
+    background-image: url(../images/bg.jpg);
+    background-size: cover;
+    background-repeat:  no-repeat;
+    background-position: center center;
+    height: 1100px;
+}
+h2{
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+figcaption{
+    
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    margin: 5px auto;
+}
+span,i{
+    color: white;
+    font-weight: bolder;
+}
+.customCharacters{
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: 0 10px;
+}
+.customCharacters img{
+    width: 90%;
+    margin: 5px auto !important;
+    border-radius: 5px;
+}
+.customCharacters:hover{
+    background-color: rgb(28, 30, 136);
+}
