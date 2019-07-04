@@ -3,12 +3,17 @@
     background-size: cover;
     background-repeat:  no-repeat;
     background-position: center center;
-    height: 1100px;
+    height: 1300px;
 }
 h2{
     text-align: center;
     color: white;
     background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 0;    
+}
+.report{
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 0 0 0;    
 }
 figcaption{
     

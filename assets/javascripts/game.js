@@ -3,23 +3,25 @@ $(document).ready(function () {
     var attachPower;
     var healthPoint;
     var characterYourName;
+    var usercounterAttackPower;
     var characterDefender;//this is for enemies
     var defenderPower;//this is for enemies
     var defenderHealthPoint;//this is for enemies
     var counterAttackPower;//this is for enemies
 
     var names = {
-        Kenobi: [150, 10,9, false, 'assets/images/obi-wan.png'],
-        Skywalker: [140, 15,8, false, 'assets/images/luke.png'],
-        Yoda: [100, 35,10, false, 'assets/images/yoda.png'],
-        Maul: [50, 5,2, false, 'assets/images/maul.png']
+        Kenobi: [150, 10, 9, false, 'assets/images/obi-wan.png'],
+        Skywalker: [140, 15, 8, false, 'assets/images/luke.png'],
+        Yoda: [100, 35, 10, false, 'assets/images/yoda.png'],
+        Maul: [50, 5, 2, false, 'assets/images/maul.png']
     }
+
     function Characters() {
         $.each(names, function (key, value) {
-            if (value[2] === false) {
+            if (value[3] === false) {
                 let createDivCharacter = $('<div class="col-md-2 customCharacters">')
                     .html('<figure>')
-                    .html(`<img src="${value[3]}">`)
+                    .html(`<img src="${value[4]}">`)
                     .addClass('character')
                 let heart = $('<i>').addClass('fas fa-heart');
                 let fist = $('<i>').addClass('fas fa-fist-raised');
@@ -30,6 +32,9 @@ $(document).ready(function () {
                 let powerSpan = $('<span>')
                     .text(value[1])
                     .addClass('power');
+                let powerAttackSpan = $('<span style="display:none;" class="attckPower">')
+                    .text(value[2])
+                    .addClass('powerAttack');
                 let health = $('<figcaption>')
                     .append(healthSpan)
                     .append(heart);
@@ -39,21 +44,24 @@ $(document).ready(function () {
                 createDivCharacter.prepend(caption);
                 createDivCharacter.append(health);
                 createDivCharacter.append(power);
+                createDivCharacter.append(powerAttackSpan);
                 $('#characters').append(createDivCharacter);
 
-                $(".characters").append(createDivCharacter)
+                $(".characters").append(createDivCharacter);
+
             }
         })
     }
     Characters()
 
-    $("#characters").on("click",".character", function () {
-       var $partType = $(this).closest('.customCharacters');//saving user character
-       characterYourName = $partType.find('.name').text();//saving user character name attachPower
-       attachPower = $partType.find('.power').text();//saving user character power number
-       healthPoint = $partType.find('.health').text();//saving user character healthPoint
+    $("#characters").on("click", ".character", function () {
+        var $partType = $(this).closest('.customCharacters');
+        characterYourName = $partType.find('.name').text();//saving user character name attachPower
+        attachPower = $partType.find('.power').text();//saving user character power number
+        healthPoint = $partType.find('.health').text();//saving user character healthPoint
+        usercounterAttackPower = $partType.find('.attckPower').text();//saving user character attackPower
 
-       $(this).removeClass('character')
+        $(this).removeClass('character')
         $("#customText").text("Your Character")
         $("#customTextEnemy").text("Choose your Defender")
 
@@ -62,32 +70,35 @@ $(document).ready(function () {
         $('#enemies').append(enemies);
 
     })
-  
+
 
     $("#enemies").on("click", ".enemy", function () {
         $("#customTextDefenter").text("Your Defender")
         $(this).removeClass(".yourCharacter").addClass('defender');
         let enemies = $('.character');
         var $partType = $(this).closest('.defender');
-        characterDefender = $partType.find('.name').text();
-        defenderPower = $partType.find('.power').text();
-        defenderHealthPoint = $partType.find('.health').text();
+        characterDefender = $partType.find('.name').text();//savong enemy character
+        defenderPower = $partType.find('.power').text();//saving enemy power
+        defenderHealthPoint = $partType.find('.health').text();//saving enemy health
+        counterAttackPower = $partType.find('.attckPower').text();//saving user character attackPower
 
         $('#defender').append($(this));
     });
 
-    $("#attack").on("click",function(){
-        console.log(characterYourName)
-        console.log(attachPower)
-        console.log(healthPoint)
-        console.log(characterDefender)
-
-
-
+    $("#attack").on("click", function () {
+        // console.log(characterYourName)
+        // console.log(attachPower)//user character attack power
+        // console.log(healthPoint)//user character health Point
+        // console.log(counterAttackPower)//user character Counter Attack Power
+        // console.log(characterDefender)
+        report(characterYourName,attachPower, healthPoint, usercounterAttackPower,
+            characterDefender, defenderPower, defenderHealthPoint, counterAttackPower)
     })
 
-    function report(userReport,attachPower, enemyReport){
-
+    function report(uC, uP, uH, ucap, dC, dP, dH, cap) {
+       // console.log(uP + uH + ucap + dP + dH + cap)
+        $("#userReport").text('Your Attacked '+uC +' for ' + ucap+ ' damaged')
+        $("#enemyReport").text(dC +' Attacked you back for '+ cap+' damaged')
     }
 
 });
