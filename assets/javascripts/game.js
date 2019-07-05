@@ -86,13 +86,21 @@ $(document).ready(function () {
     });
     function attackReport(uC, uP, uH, ucap, dC, dP, dH, cap) {
         // console.log(uP + uH + ucap + dP + dH + cap)
-        $(this)
-      
-       cap++
-         $("#userReport").text('Your Attacked '+uC +' for ' + ucap+ ' damaged')
-         $("#enemyReport").text(dC +' Attacked you back for '+ cap+' damaged')
-         return(counterAttackPower)
-       }
+
+
+        $("#userReport").text('Your Character ' + uC + ' Attacked Enemy for ' + ucap + ' damaged')
+        $("#enemyReport").text(dC + ' Attacked you back for ' + cap + ' damaged')
+        uH = uH - cap
+        dH = dH - ucap
+        ucap = ucap + ucap
+        cap = cap + cap
+
+        healthPoint = uH
+        defenderHealthPoint = dH
+        usercounterAttackPower = ucap
+        counterAttackPower = cap
+        console.log(defenderHealthPoint +" "+ usercounterAttackPower+" "+   counterAttackPower)
+    }
 
     $("#attack").on("click", function () {
         // console.log(characterYourName)
@@ -100,12 +108,12 @@ $(document).ready(function () {
         // console.log(healthPoint)//user character health Point
         // console.log(counterAttackPower)//user character Counter Attack Power
         // console.log(characterDefender)
-       
-        attackReport(characterYourName,attachPower, healthPoint, usercounterAttackPower,
+
+        attackReport(characterYourName, attachPower, healthPoint, usercounterAttackPower,
             characterDefender, defenderPower, defenderHealthPoint, counterAttackPower)
-            
+
     })
 
-    
+
 
 });
