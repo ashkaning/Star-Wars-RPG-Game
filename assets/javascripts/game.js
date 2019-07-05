@@ -57,9 +57,9 @@ $(document).ready(function () {
     $("#characters").on("click", ".character", function () {
         var $partType = $(this).closest('.customCharacters');
         characterYourName = $partType.find('.name').text();//saving user character name attachPower
-        attachPower = $partType.find('.power').text();//saving user character power number
-        healthPoint = $partType.find('.health').text();//saving user character healthPoint
-        usercounterAttackPower = $partType.find('.attckPower').text();//saving user character attackPower
+        attachPower = parseInt($partType.find('.power').text());//saving user character power number
+        healthPoint = parseInt($partType.find('.health').text());//saving user character healthPoint
+        usercounterAttackPower = parseInt($partType.find('.attckPower').text());//saving user character attackPower
 
         $(this).removeClass('character')
         $("#customText").text("Your Character")
@@ -78,12 +78,21 @@ $(document).ready(function () {
         let enemies = $('.character');
         var $partType = $(this).closest('.defender');
         characterDefender = $partType.find('.name').text();//savong enemy character
-        defenderPower = $partType.find('.power').text();//saving enemy power
-        defenderHealthPoint = $partType.find('.health').text();//saving enemy health
-        counterAttackPower = $partType.find('.attckPower').text();//saving user character attackPower
+        defenderPower = parseInt($partType.find('.power').text());//saving enemy power
+        defenderHealthPoint = parseInt($partType.find('.health').text());//saving enemy health
+        counterAttackPower = parseInt($partType.find('.attckPower').text());//saving user character attackPower
 
         $('#defender').append($(this));
     });
+    function attackReport(uC, uP, uH, ucap, dC, dP, dH, cap) {
+        // console.log(uP + uH + ucap + dP + dH + cap)
+        $(this)
+      
+       cap++
+         $("#userReport").text('Your Attacked '+uC +' for ' + ucap+ ' damaged')
+         $("#enemyReport").text(dC +' Attacked you back for '+ cap+' damaged')
+         return(counterAttackPower)
+       }
 
     $("#attack").on("click", function () {
         // console.log(characterYourName)
@@ -91,14 +100,12 @@ $(document).ready(function () {
         // console.log(healthPoint)//user character health Point
         // console.log(counterAttackPower)//user character Counter Attack Power
         // console.log(characterDefender)
-        report(characterYourName,attachPower, healthPoint, usercounterAttackPower,
+       
+        attackReport(characterYourName,attachPower, healthPoint, usercounterAttackPower,
             characterDefender, defenderPower, defenderHealthPoint, counterAttackPower)
+            
     })
 
-    function report(uC, uP, uH, ucap, dC, dP, dH, cap) {
-       // console.log(uP + uH + ucap + dP + dH + cap)
-        $("#userReport").text('Your Attacked '+uC +' for ' + ucap+ ' damaged')
-        $("#enemyReport").text(dC +' Attacked you back for '+ cap+' damaged')
-    }
+    
 
 });
