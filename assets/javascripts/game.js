@@ -52,7 +52,7 @@ $(document).ready(function () {
             }
         })
     }
-    Characters()
+    Characters();
 
     $("#characters").on("click", ".character", function () {
         var $partType = $(this).closest('.customCharacters');
@@ -74,9 +74,9 @@ $(document).ready(function () {
 
     $("#enemies").on("click", ".enemy", function () {
         $("#customTextDefenter").text("Your Defender")
-        $(this).removeClass(".yourCharacter").addClass('defender');
+        $(this).removeClass(".yourCharacter").addClass('defenderTemp');
         let enemies = $('.character');
-        var $partType = $(this).closest('.defender');
+        var $partType = $(this).closest('.defenderTemp');
         characterDefender = $partType.find('.name').text();//savong enemy character
         defenderPower = parseInt($partType.find('.power').text());//saving enemy power
         defenderHealthPoint = parseInt($partType.find('.health').text());//saving enemy health
@@ -85,35 +85,46 @@ $(document).ready(function () {
         $('#defender').append($(this));
     });
     function attackReport(uC, uP, uH, ucap, dC, dP, dH, cap) {
-        // console.log(uP + uH + ucap + dP + dH + cap)
+alert(ucap)
 
+        uH = uH - cap;
+        dH = dH - ucap;
+        ucap = ucap + ucap;
+        cap = cap + cap;
 
-        $("#userReport").text('Your Character ' + uC + ' Attacked Enemy for ' + ucap + ' damaged')
-        $("#enemyReport").text(dC + ' Attacked you back for ' + cap + ' damaged')
-        uH = uH - cap
-        dH = dH - ucap
-        ucap = ucap + ucap
-        cap = cap + cap
+        healthPoint = uH;
+        defenderHealthPoint = dH;
+        usercounterAttackPower = ucap;
+        counterAttackPower = cap;
 
-        healthPoint = uH
-        defenderHealthPoint = dH
-        usercounterAttackPower = ucap
-        counterAttackPower = cap
-        console.log(defenderHealthPoint +" "+ usercounterAttackPower+" "+   counterAttackPower)
+         $("#userReport").text('Your Character ' + uC + ' Attacked Enemy for ' + ucap + ' damaged');
+         $("#enemyReport").text(dC + ' Attacked  y ou b ack for ' + cap + ' damaged');
+         console.log(uH)
+         console.log(dH)
+         if(healthPoint <= 0)
+         {
+             alert("You lost");
+         }
+     if(defenderHealthPoint <=0)
+     {
+         alert("You Won!")
+         $("#enemyReport").text("Please choose another enemry")
+         $( ".defenderTemp" ).remove();
+         usercounterAttackPower =0;
+         usercounterAttackPower = usercounterAttackPower+4;
+         alert(usercounterAttackPower)
+        
+     }
+            
+       
     }
+   
+        $("#attack").on("click", function () {
 
-    $("#attack").on("click", function () {
-        // console.log(characterYourName)
-        // console.log(attachPower)//user character attack power
-        // console.log(healthPoint)//user character health Point
-        // console.log(counterAttackPower)//user character Counter Attack Power
-        // console.log(characterDefender)
-
+    
         attackReport(characterYourName, attachPower, healthPoint, usercounterAttackPower,
             characterDefender, defenderPower, defenderHealthPoint, counterAttackPower)
 
-    })
-
-
+    });
 
 });
