@@ -85,7 +85,7 @@ $(document).ready(function () {
         $('#defender').append($(this));
     });
     function attackReport(uC, uP, uH, ucap, dC, dP, dH, cap) {
-alert(ucap)
+        //alert(ucap)
 
         uH = uH - cap;
         dH = dH - ucap;
@@ -97,34 +97,29 @@ alert(ucap)
         usercounterAttackPower = ucap;
         counterAttackPower = cap;
 
-         $("#userReport").text('Your Character ' + uC + ' Attacked Enemy for ' + ucap + ' damaged');
-         $("#enemyReport").text(dC + ' Attacked  y ou b ack for ' + cap + ' damaged');
-         console.log(uH)
-         console.log(dH)
-         if(healthPoint <= 0)
-         {
-             alert("You lost");
-         }
-     if(defenderHealthPoint <=0)
-     {
-         alert("You Won!")
-         $("#enemyReport").text("Please choose another enemry")
-         $( ".defenderTemp" ).remove();
-         usercounterAttackPower =0;
-         usercounterAttackPower = usercounterAttackPower+4;
-         alert(usercounterAttackPower)
-        
-     }
-            
-       
-    }
-   
-        $("#attack").on("click", function () {
+        $("#userReport").text('Your Character ' + uC + ' Attacked Enemy for ' + ucap + ' damaged');
+        $("#enemyReport").text(dC + ' Attacked  y ou b ack for ' + cap + ' damaged');
+        //console.log(uH)
+        //console.log(dH)
+        if (defenderHealthPoint <= 0 && healthPoint <= 0) {
+            alert("You lost");
+        }
+        else if (healthPoint <= 0) {
+            alert("You lost");
+        }
+        else if (defenderHealthPoint <= 0) {
+            alert("You Won!")
+            $("#enemyReport").text("Please choose another enemry")
+            $(".defenderTemp").remove();
+            usercounterAttackPower = 0;
+            usercounterAttackPower = usercounterAttackPower + 4;
+            // alert(usercounterAttackPower)        
+        }
 
-    
+    }
+    $("#attack").on("click", function () {
         attackReport(characterYourName, attachPower, healthPoint, usercounterAttackPower,
             characterDefender, defenderPower, defenderHealthPoint, counterAttackPower)
-
     });
 
 });
